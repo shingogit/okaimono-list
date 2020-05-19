@@ -4,4 +4,24 @@
 }
 body {
     background: #ddd;
+    font-size: 1.1em;
+}
+#app {
+    position: relative;
+}
+.total {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+}
+.total p {
+    font-size: 1.2rem;
+}
+.total p span {
+    display: inline-block;
+    width: 80px;
+    text-indent: 10px;
+    text-align: left;
 }
