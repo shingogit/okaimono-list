@@ -2,26 +2,73 @@
     margin: 0;
     padding: 0;
 }
+*:focus {
+	box-shadow: none !important;
+}
+.wf-notosansjapanese { font-family: "Noto Sans JP"; }
 body {
-    background: #ddd;
+    background: #f2f3f4;
     font-size: 1.1em;
 }
 #app {
     position: relative;
+    width: 600px;
+    padding-bottom: 80px;
 }
+h1.title {
+    font-size: 1.2em;
+}
+
+.table_wrap .btn-group button {
+    font-size: 12px;
+}
+.table_wrap small {
+    font-size: 15px;
+}
+
 .total {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     padding: 20px;
+    background: #e1e1e1;
 }
-.total p {
-    font-size: 1.2rem;
+.total small {
+    display: block;
+    text-align: left;
+    margin-bottom: 2px;
 }
+.add_circle_btn {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    padding: 0;
+    position: relative;
+    top: 8px;
+}
+
 .total p span {
     display: inline-block;
     width: 80px;
     text-indent: 10px;
     text-align: left;
+}
+table tr:hover {
+    background: #fcfcfc;
+} 
+table thead tr th {
+    font-weight: normal;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    background: #16a2b7;
+    color: #fff;
+}
+table tbody tr td {
+    font-size: 0.9em;
+}
+.opacity {
+    opacity: 0.6;
+    text-decoration: line-through;
+
 }
