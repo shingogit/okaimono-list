@@ -20,17 +20,11 @@
         <!-- 合計金額表示 -->
         <div class="col-12 pb-2 pt-3">
           <div class="row">
-            <div class="col-4 text-left">
-              <small>合計個数: {{ totalCount }}</small>
-            </div>
-            <div class="col-4 text-left">
-              <small>合計金額: ¥{{ totalPrice }}</small>
-            </div>
-            <div class="col-4 text-center">
+            <div class="col-12 text-center">
               <div class="btn-group w-100">
-                <button type="button" :class="[{ 'active': (activeNum === 0) }, 'btn btn-outline-info btn-sm']" @click="taskFilter = 0">全て</button>
-                <button type="button" :class="[{ 'active': (activeNum === 1) }, 'btn btn-outline-info btn-sm']" @click="taskFilter = 1">未</button>
-                <button type="button" :class="[{ 'active': (activeNum === 2) }, 'btn btn-outline-info btn-sm']" @click="taskFilter = 2">済</button>
+                <button type="button" class="active btn btn-outline-info">全て</button>
+                <button type="button" class="btn btn-outline-info">未チェック</button>
+                <button type="button" class="btn btn-outline-info">チェック済</button>
               </div>
             </div>
           </div>
@@ -39,36 +33,32 @@
         <table class="table">
           <thead class="thead">
             <tr>
-              <th class="text-left" style="width: 50%;">品目</th>
-              <th class="text-right" style="width: 25%;">数量</th>
-              <th class="text-right" style="width: 25%;">金額</th>
+              <th class="text-center border-right" style="width: 70%;">品目</th>
+              <th class="text-center" style="width: 30%;">金額</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in taskFilter" :key="index" :class="{ 'opacity': item.checked }" @click="handleChange(item)">
-              <td class="text-left">{{ item.name }}</td>
-              <td class="text-right">{{ item.count | countUnit }}</td>
-              <td class="text-right">{{ item.price | comma }}</td>
+            <tr class="border-bottom">
+              <td class="text-left border-right">玉ねぎ</td>
+              <td class="text-center">300円</td>
+            </tr>
+            <tr class="bg-white">
+              <td></td>
+              <td class="text-center font-weight-bold">合計: 300円</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="total pt-2 border-top">
+      <div class="total border-top">
         <div class="row">
-          <div class="col-5 text-center">
-            <small>品名</small>
-            <input type="text" class="form-control col-12" v-model.trim="createItem.name">
+          <div class="col-6 pr-0 text-center">
+            <input type="text" class="form-control col-12" placeholder="品名">
+          </div>
+          <div class="col-4 pr-0 text-center">
+            <input type="text" class="form-control col-12" placeholder="金額">
           </div>
           <div class="col-2 text-center">
-            <small>数量</small>
-            <input type="number" class="form-control col-12" min="0" max="10" v-model.number="createItem.count">
-          </div>
-          <div class="col-3 text-center">
-            <small>金額</small>
-            <input type="text" class="form-control col-12" v-model.trim="createItem.price">
-          </div>
-          <div class="col-2 text-center">
-            <button class="btn btn-info add_circle_btn shadow-sm col-12" @click="addTask">追加</button>
+            <button class="btn btn-info shadow-sm col-12">追加</button>
           </div>
         </div>
       </div>
@@ -79,94 +69,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script>
-    var app = new Vue({
-      el: "#app",
-      data: {
-        title: "お買い物リスト",
-        activeNum: 0,
-        createItem: {
-          name: null,
-          count: null,
-          price: null,
-          checked: false
-        },
-        tasks: [
-          {
-            name: '玉ねぎ',
-            count: 3,
-            price: 100,
-            checked: false
-          },
-          {
-            name: '青ネギ',
-            count: 1,
-            price: 98,
-            checked: false
-          },
-          {
-            name: '大根',
-            count: 1,
-            price: 150,
-            checked: false
-          }
-        ]
-      },
-      filters: {
-        comma(val) {
-          return `¥ ${parseInt(val).toLocaleString()}`
-        },
-        countUnit(val) {
-          return `${val} 個`
-        }
-      },
-      computed: {
-        totalCount() {
-          let count = 0
-          this.tasks.forEach(task => {
-            count += parseInt(task.count)
-          })
-          return count
-        },
-        totalPrice() {
-          let price = 0
-          this.tasks.forEach(task => {
-            price += parseInt(task.price)
-          })
-          return price.toLocaleString()
-        },
-        taskFilter: {
-          get: function () {
-            if (!this.activeNum) return this.tasks
-            const order = (this.activeNum === 2) ? true : false
-            return this.tasks.filter((task) => {
-              return task.checked === order
-            })
-          },
-          set: function (value) {
-            this.activeNum = value
-          }
-        }
-      },
-      methods: {
-        /**
-         *  タスクの追加
-         */
-        addTask() {
-          // deepcopyして配列に追加
-          const create = JSON.parse(JSON.stringify(this.createItem))
-          this.tasks.push(create)
-          // 変数の初期化
-          this.createItem.name = null
-          this.createItem.count = null
-          this.createItem.price = null
-        },
-        handleChange(item) {
-          item.checked = !item.checked
-        }
-      }
-    })
-  </script>
+
 </body>
 
 </html>

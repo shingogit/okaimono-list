@@ -1,0 +1,56 @@
+<!--- Vueの基本的な書き方 --->
+
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>お買い物リスト</title>
+</head>
+
+<body>
+    <!---  id 'app' をマウント --->
+    <div id="app">
+
+        <!-- ”Mustache” 構文(二重中括弧)でプロパティを展開 -->
+        {{ message }}
+    </div>
+</body>
+
+</html>
+
+<script>
+    // Vue インスタンスを作成
+    var app = new Vue({
+        el: '#app',
+        
+        /**
+         *  dataプロパティ
+         */
+        data: {
+            message: 'Hello Vue!'
+        },
+
+
+        /**
+         *  算出プロパティ
+         */
+        computed: {
+            reversedMessage() {
+                // なんらかの処理
+            }
+        },
+
+
+        /**
+         *  メソッドプロパティ
+         *  登録したイベントハンドラをここで処理する
+         */
+        methods: {
+            onClick() {
+                // なんらかの処理
+            }
+        }
+    })
+</script>
