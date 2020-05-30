@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>お買い物リスト</title>
+    <title>テンプレート</title>
 </head>
 
 <body>
@@ -15,11 +15,11 @@
 
         <!-- ”Mustache” 構文(二重中括弧)でプロパティを展開 -->
         {{ message }}
+
     </div>
-</body>
 
-</html>
-
+<!-- Vuejs読み込み -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
     // Vue インスタンスを作成
     var app = new Vue({
@@ -32,6 +32,18 @@
             message: 'Hello Vue!'
         },
 
+        /**
+         *  ライフサイクルメソッド
+         */
+        created() { 
+            /** なんらかの初期化処理 */ 
+        },
+        mounted() { 
+            /** なんらかの初期化処理 */ 
+        },
+        destroyed() {
+            /** なんらかのイベント破棄 */ 
+        },
 
         /**
          *  算出プロパティ
@@ -54,3 +66,7 @@
         }
     })
 </script>
+
+</body>
+
+</html>
