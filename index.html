@@ -38,13 +38,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="border-bottom">
-              <td class="text-left border-right">玉ねぎ</td>
-              <td class="text-center">300円</td>
+            <tr v-for="(item, index) in tasks" :key="index" :class="[{ 'opacity': item.checked }, 'border-bottom']" @click="onCheck(item)">
+              <td class="text-left border-right">{{ item.name }}</td>
+              <td class="text-center">{{ item.price }}</td>
             </tr>
             <tr class="bg-white">
               <td></td>
-              <td class="text-center font-weight-bold">合計: 300円</td>
+              <td class="text-center font-weight-bold">合計: {{ totalPrice }}</td>
             </tr>
           </tbody>
         </table>
@@ -52,13 +52,13 @@
       <div class="total border-top">
         <div class="row">
           <div class="col-6 pr-0 text-center">
-            <input type="text" class="form-control col-12" placeholder="品名">
+            <input type="text" class="form-control col-12" placeholder="品名" v-model="createItem.name">
           </div>
           <div class="col-4 pr-0 text-center">
-            <input type="text" class="form-control col-12" placeholder="金額">
+            <input type="text" class="form-control col-12" placeholder="金額" v-model="createItem.price">
           </div>
           <div class="col-2 text-center">
-            <button class="btn btn-info shadow-sm col-12">追加</button>
+            <button class="btn btn-info shadow-sm col-12" @click="addTask">追加</button>
           </div>
         </div>
       </div>
@@ -69,6 +69,46 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        createItem: {
+          name: null,
+          price: null,
+          checked: false
+        },
+        tasks: [
+          {
+            name: '牛乳',
+            price: 100,
+            checked: false
+          }
+        ]
+      },
+      computed: {
+        totalPrice() {
+          let price = 0
+          this.tasks.forEach(task => {
+            price += parseInt(task.price)
+          });
+          return price.toLocaleString()
+        }
+      },
+      methods: {
+        addTask() {
+          const createObj = JSON.parse(JSON.stringify(this.createItem))
+          this.tasks.push(createObj)
+
+          this.createItem.name = null
+          this.createItem.price = null
+        },
+        onCheck(item) {
+          item.checked = !item.checked
+        }
+      }
+    })
+  </script>
 
 </body>
 
